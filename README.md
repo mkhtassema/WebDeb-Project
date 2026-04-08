@@ -4,8 +4,11 @@ FilmSpace — Movie Review Web Application
 -Group Members-
 
  • Student 1: Mukhtarkyzy Assem
+ 
  • Student 2: Mukatay Nurdana
+ 
  • Student 3: 
+ 
 
 -Project Description-
 
@@ -17,11 +20,17 @@ The application combines an Angular frontend with a Django REST Framework backen
 -Main Features-
 
  • User authentication (login/logout with JWT)
+ 
  • Browse list of movies
+ 
  • View movie details
+ 
  • Add, edit, and delete reviews
+ 
  • Rating system (1–5 stars)
+ 
  • Basic error handling
+ 
 
 
 -Technologies-
@@ -29,5 +38,7 @@ The application combines an Angular frontend with a Django REST Framework backen
  • Frontend: Angular
  
  • Backend: Django + Django REST Framework
+ 
  • Authentication: JWT
+ 
 

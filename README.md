@@ -9,7 +9,7 @@ FilmSpace — Movie Review Web Application
  
  • Student 2: Mukatay Nurdana
  
- • Student 3: 
+ • Student 3: Toltay Azat
  
 
  

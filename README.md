@@ -3,7 +3,7 @@ FilmSpace — Movie Review Web Application
 
 
 
--Group Members-
+--Group Members--
 
  • Student 1: Mukhtarkyzy Assem
  
@@ -14,7 +14,7 @@ FilmSpace — Movie Review Web Application
 
  
 
--Project Description-
+--Project Description--
 
 FilmSpace is a full-stack web application developed as part of the Web Development (Angular + Django) course at KBTU.
 The main idea of the project is to create a simple and user-friendly platform where users can discover movies, explore their details, and share their opinions. Users can view a list of movies, open individual movie pages, and leave reviews with ratings based on their personal experience.
@@ -23,7 +23,7 @@ The application combines an Angular frontend with a Django REST Framework backen
 
 
 
--Main Features-
+--Main Features--
 
  • User authentication (login/logout with JWT)
  
@@ -41,7 +41,7 @@ The application combines an Angular frontend with a Django REST Framework backen
 
 
 
--Technologies-
+--Technologies--
 
  • Frontend: Angular
  

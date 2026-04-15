@@ -1,6 +1,7 @@
 🚀 Web Dev Final Project  
 
-Project: FilmSpace    
+Project: FilmSpace: Beyond Watching  
+Team: WebDeb-Project 💻  
 
 👩‍💻 Team members:  
 • Mukhtarkyzy Assem  
@@ -9,142 +10,121 @@ Project: FilmSpace
 
 ---
 
-🎯 FilmSpace  
-Smart Movie Discovery & Social Review Platform
+🎯 FilmSpace: Beyond Watching  
+Interactive Movie Experience Platform
 
 ---
 
 📌 Project Description
 
-FilmSpace is a full-stack web application developed as part of the Web Development (Angular + Django) course at KBTU.  
+FilmSpace is a full-stack web application developed as part of the Web Development (Angular + Django) course at KBTU.
 
-Unlike basic movie review platforms, FilmSpace combines personalized recommendations, social interaction, and interactive decision-making tools to create a more engaging user experience.  
+Unlike traditional movie platforms, FilmSpace focuses on personalized and interactive movie discovery. Instead of simply browsing films, users engage in a guided cinematic experience through emotion-based recommendations, personality analysis, and social interaction.
 
-Users can not only explore movies and leave reviews, but also track their watch history, follow other users, receive recommendations based on their preferences, and participate in movie selection polls.  
-
-The application is built using an Angular frontend and a Django REST Framework backend, with JWT authentication обеспечивающим secure and personalized access.
+The platform combines Angular frontend with Django REST Framework backend, using JWT authentication to provide secure and personalized user experiences.
 
 ---
 
-👤 User Functionality
+🧠 Core Concept
 
-### 1. 🔐 Authentication & Personal Dashboard
-
-Users can register and log in using JWT authentication.  
-
-After login, each user accesses a personalized dashboard displaying:  
-📌 Recommended movies based on ratings  
-🎬 Popular and recently added movies  
-👥 Activity from followed users  
-🗳️ Active movie polls  
+👉 Users do not just search for movies  
+👉 The system understands user preferences and emotions  
+👉 The platform creates a cinematic journey
 
 ---
 
-### 2. 🎥 Movie Browsing & Reviews
-
-Users can:  
-• Browse a list of movies  
-• View detailed movie pages  
-• Leave reviews and ratings (1–5 stars)  
-• Edit or delete their reviews  
-
-Each movie page includes:  
-⭐ Average rating  
-👥 Number of users who rated  
-📝 User reviews  
+🔥 Key Features
 
 ---
 
-### 3. 📌 Watchlist & Watched System
+### 🟢 1. Your Life → Movie Mapping
 
-Users can manage their personal movie activity:  
+Users can describe their current emotional or life situation:
 
-➕ Add movies to Watchlist (Want to Watch)  
-✅ Mark movies as Watched  
-❌ Remove movies from lists  
+> “I feel lost studying abroad”
 
-This transforms the platform into a movie tracking system.
+The system analyzes input and suggests relevant movies based on:
+• mood tags  
+• genres  
+• themes  
 
----
-
-### 4. 🧠 Personalized Recommendation System
-
-FilmSpace provides dynamic movie recommendations based on user behavior.  
-
-The system analyzes:  
-• User ratings  
-• Preferred genres  
-
-And suggests:  
-🎯 Movies similar to highly rated ones  
+This creates a personalized movie recommendation experience.
 
 ---
 
-### 5. 👥 Follow System & Social Interaction
+### 🟣 2. Personality Test & Taste DNA
 
-Users can interact with each other through a social system:  
+Users take an interactive test to define their movie personality.
 
-• Follow / Unfollow users  
-• View other users’ profiles  
-• See their reviews and ratings  
+Example result:
 
-Optional feed includes:  
-📰 Recent activity (e.g., “User rated Inception 5⭐”)  
+Your cinema personality:  
+🎭 Emotional Explorer
 
----
+Taste DNA:  
+• 40% Drama  
+• 30% Sci-Fi  
+• 30% Romance  
 
-### 6. 🗳️ Movie Poll System
-
-Users can create polls to decide what to watch:  
-
-Poll creation includes:  
-📋 Poll title  
-🎬 List of movies  
-👥 Voting by users  
-
-System features:  
-✔ Vote for a movie  
-🏆 Display winning option  
-
-This adds interactive group decision-making to the platform.
+This profile is used to enhance recommendations and comparisons.
 
 ---
 
-### 7. 📊 Smart Rating Statistics
+### 🔵 3. Social Match & Movie Interaction
 
-Each movie includes analytical insights:  
+Users can interact socially:
 
-• ⭐ Average rating  
-• 👥 Total number of ratings  
-• 🟢 User’s personal rating  
-
-This enhances the user experience with data-driven feedback.
+• Follow other users  
+• Compare movie tastes  
+• View compatibility score (e.g., 78% match)  
+• Send movie recommendations  
+• Create polls: “What should we watch?”  
 
 ---
 
-## 🔥 Features
+### 🗳️ 4. Movie Poll System
 
-### Authentication
-• JWT-based login & registration  
-• HTTP Interceptor for attaching tokens  
-• Protected routes  
+Users can create polls to decide what to watch together.
 
-### Movies
-• List & detail views  
-• Review system (CRUD)  
-• Rating system  
+• Add multiple movies  
+• Vote on options  
+• System determines winner  
 
-### User Features
-• Watchlist & watched tracking  
-• Personalized recommendations  
-• Follow system  
+---
 
-### Social & Interactive
-• Movie polls  
-• User activity  
+### 📊 5. Reviews & Ratings
 
-### Analytics
-• Smart rating statistics  
+• Add, edit, delete reviews  
+• Rate movies (1–5 stars)  
+• View average ratings  
+
+---
+
+### 🎮 6. Gamification System
+
+Users earn coins for activity:
+
+• Writing reviews  
+• Rating movies  
+• Completing tests  
+
+Levels:
+• Beginner  
+• Explorer  
+• Film Expert  
+
+---
+
+## 🧱 Application Structure
+
+### Pages:
+1. Login / Register  
+2. Home (interactive dashboard)  
+3. Movies  
+4. Movie Detail  
+5. Personality Test  
+6. Social / Match  
+7. Profile  
 
 ---
 
@@ -155,23 +135,24 @@ This enhances the user experience with data-driven feedback.
 | Frontend   | Angular, TypeScript, CSS |
 | Backend    | Django, Django REST Framework |
 | Auth       | JWT (SimpleJWT) |
-| Database   | SQLite / PostgreSQL |
-| HTTP       | Angular HttpClient + Interceptors |
+| Database   | SQLite |
+| HTTP       | Angular HttpClient |
 
 ---
 
-## 📡 Example API Endpoints  
+## 📡 API Endpoints (Example)
 
 | Method | Endpoint | Description |
 |--------|--------|------------|
-| POST | /auth/register/ | Register user |
+| POST | /auth/register/ | Register |
 | POST | /auth/login/ | Login |
-| POST | /auth/logout/ | Logout |
-| GET | /movies/ | Get all movies |
+| GET | /movies/ | List movies |
 | GET | /movies/:id/ | Movie details |
 | POST | /reviews/ | Create review |
-| GET | /watchlist/ | Get user watchlist |
-| POST | /follow/ | Follow user |
-| GET | /recommendations/ | Get recommendations |
+| POST | /emotion/ | Emotion-based recommendation |
+| POST | /test/ | Submit personality test |
+| GET | /match/:user_id/ | Get compatibility |
 | POST | /polls/ | Create poll |
-| POST | /polls/vote/ | Vote in poll |
+| POST | /polls/vote/ | Vote |
+
+___

@@ -1,17 +1,27 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import TasteProfile
-from django.contrib.auth.models import User
 
 @api_view(['POST'])
 def test_result(request):
     user = request.user
-    profile = TasteProfile.objects.get(user=user)
+    data = request.data
 
-    profile.drama += 10
+    profile, created = TasteProfile.objects.get_or_create(user=user)
+
+    profile.drama += int(data.get("drama", 0))
+    profile.scifi += int(data.get("scifi", 0))
+    profile.romance += int(data.get("romance", 0))
+
     profile.save()
 
-    return Response({"message": "Test saved"})
+    return Response({
+        "message": "Test saved",
+        "drama": profile.drama,
+        "scifi": profile.scifi,
+        "romance": profile.romance
+    })
+
 
 @api_view(['GET'])
 def match(request, user_id):

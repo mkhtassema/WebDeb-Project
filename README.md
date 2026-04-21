@@ -74,10 +74,8 @@ This profile is used to enhance recommendations and comparisons.
 
 Users can interact socially:
 
-• Follow other users  
 • Compare movie tastes  
-• View compatibility score (e.g., 78% match)  
-• Send movie recommendations  
+• View compatibility score (e.g., 78% match)   
 • Create polls: “What should we watch?”  
 
 ---

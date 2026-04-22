@@ -1,0 +1,89 @@
+<div class="match-page">
+  <div class="page-header">
+    <h1> Compatibility Match</h1>
+    <p>Find out how well your movie taste matches with others</p>
+  </div>
+
+  <div class="match-form">
+    <h2>Enter User ID to Match</h2>
+    <p class="hint">Enter another user's UUID (found on their profile page)</p>
+    <div class="input-row">
+      <input type="text" [(ngModel)]="userId" placeholder="e.g. a1b2c3d4-e5f6-..." (keyup.enter)="findMatch()">
+      <button class="btn-match" (click)="findMatch()" [disabled]="loading || !userId.trim()">
+        {{ loading ? 'Matching...' : 'Find Match' }}
+      </button>
+    </div>
+    <div class="error-msg" *ngIf="error">{{ error }}</div>
+  </div>
+
+  <div class="result-card" *ngIf="result">
+    <div class="match-header">
+      <div class="match-avatars">
+        <div class="avatar you">You</div>
+        <div class="match-heart">💞</div>
+        <div class="avatar them">{{ result.user?.charAt(0)?.toUpperCase() }}</div>
+      </div>
+      <div class="match-users">
+        <span>You</span>
+        <span>vs</span>
+        <span>{{ result.user }}</span>
+      </div>
+    </div>
+
+    <div class="score-display">
+      <div class="score-circle" [style.borderColor]="getScoreColor()">
+        <span class="score-number" [style.color]="getScoreColor()">{{ result.compatibility_score }}%</span>
+        <span class="score-text">Match</span>
+      </div>
+      <div class="score-label">{{ getScoreLabel() }}</div>
+    </div>
+
+    <div class="match-details">
+      <div class="detail-item">
+        <span class="detail-icon">🎬</span>
+        <div>
+          <div class="detail-value">{{ result.shared_movies }}</div>
+          <div class="detail-label">Shared Favorites</div>
+        </div>
+      </div>
+      <div class="detail-item">
+        <span class="detail-icon">🧬</span>
+        <div>
+          <div class="detail-value">{{ result.my_personality || 'Unknown' | titlecase }}</div>
+          <div class="detail-label">Your Personality</div>
+        </div>
+      </div>
+      <div class="detail-item">
+        <span class="detail-icon">🧬</span>
+        <div>
+          <div class="detail-value">{{ result.their_personality || 'Unknown' | titlecase }}</div>
+          <div class="detail-label">Their Personality</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="match-tip">
+      <span>💡</span>
+      <p *ngIf="result.compatibility_score >= 60">You two would love watching movies together! You share similar taste.</p>
+      <p *ngIf="result.compatibility_score < 60">Add more favorites and take the personality test to boost your compatibility!</p>
+    </div>
+  </div>
+
+  <div class="how-it-works">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="step-icon">❤️</span>
+        <p>Add movies to your favorites</p>
+      </div>
+      <div class="step">
+        <span class="step-icon">🧬</span>
+        <p>Complete the Taste DNA test</p>
+      </div>
+      <div class="step">
+        <span class="step-icon">💞</span>
+        <p>Match with other users by ID</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="test-page">
+  <div class="page-header">
+    <h1> Taste DNA Test</h1>
+    <p>Discover your cinematic personality type</p>
+  </div>
+
+  <div class="test-container" *ngIf="!result">
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="progress"></div>
+    </div>
+    <p class="progress-text">Question {{ currentQ + 1 }} of {{ questions.length }}</p>
+
+    <div class="question-card">
+      <h2>{{ currentQuestion.text }}</h2>
+      <div class="options">
+        <button *ngFor="let opt of currentQuestion.options"
+          class="option-btn"
+          [class.selected]="answers[currentQuestion.id] === opt.value"
+          (click)="selectAnswer(currentQuestion.id, opt.value)">
+          {{ opt.label }}
+        </button>
+      </div>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="btn-prev" (click)="currentQ = currentQ - 1" [disabled]="currentQ === 0">← Previous</button>
+      <button class="btn-next" (click)="currentQ = currentQ + 1" *ngIf="currentQ < questions.length - 1" [disabled]="!answers[currentQuestion.id]">Next →</button>
+      <button class="btn-submit" (click)="submitTest()" *ngIf="currentQ === questions.length - 1" [disabled]="!allAnswered || loading">
+        {{ loading ? 'Analyzing...' : '🧬 Reveal My DNA' }}
+      </button>
+    </div>
+  </div>
+
+  <div class="result-container" *ngIf="result">
+    <div class="personality-badge">
+      <div class="badge-icon">🧬</div>
+      <h2>You are...</h2>
+      <h1 class="personality-type">{{ result.personality_type | titlecase }}</h1>
+    </div>
+
+    <div class="dna-bars">
+      <h3>Your Taste DNA</h3>
+      <div *ngFor="let item of result.taste_dna | keyvalue" class="dna-bar">
+        <span class="dna-label">{{ $any(item.key) | titlecase }}</span>
+        <div class="bar-track">
+          <div class="bar-fill" [style.width.%]="getDnaWidth(item.value)"></div>
+        </div>
+        <span class="dna-value">{{ item.value }}</span>
+      </div>
+    </div>
+
+    <div class="recommendations">
+      <h3>Movies for Your Personality</h3>
+      <div class="rec-grid">
+        <div class="rec-card" *ngFor="let movie of result.recommended_movies" (click)="goToMovie(movie.id)">
+          <img *ngIf="movie.poster_url" [src]="movie.poster_url" [alt]="movie.title">
+          <div *ngIf="!movie.poster_url" class="rec-placeholder">🎬</div>
+          <p>{{ movie.title }}</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-restart" (click)="restart()">🔄 Retake Test</button>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="discover-page">
+  <div class="page-header">
+    <h1> Discover</h1>
+    <p>Find movies based on how you feel right now</p>
+  </div>
+
+  <div class="discover-sections">
+    <div class="section emotion-section">
+      <h2>📝 Tell me about your day...</h2>
+      <p class="section-desc">Describe how you're feeling and we'll find the perfect movie</p>
+      <div class="emotion-input">
+        <textarea [(ngModel)]="lifeText" placeholder="e.g. I had a terrible day at work and feel really stressed and anxious..." rows="5"></textarea>
+        <button class="btn-analyze" (click)="analyzeEmotion()" [disabled]="loading || !lifeText.trim()">
+          {{ loading ? '🔮 Analyzing...' : ' Find My Movie' }}
+        </button>
+      </div>
+      <div class="error-msg" *ngIf="error">{{ error }}</div>
+
+      <div class="emotion-result" *ngIf="result">
+        <div class="detected-mood">
+          <span class="mood-label">Detected mood:</span>
+          <span class="mood-value">{{ result.detected_mood | titlecase }}</span>
+        </div>
+        <div class="rec-movie" (click)="goToMovie(result.movie.id)">
+          <img *ngIf="result.movie.poster_url" [src]="result.movie.poster_url" [alt]="result.movie.title">
+          <div class="rec-info">
+            <h3>{{ result.movie.title }}</h3>
+            <p>{{ result.movie.genre | titlecase }} • {{ result.movie.year }}</p>
+            <p class="rec-desc">{{ result.movie.description | slice:0:100 }}...</p>
+            <span class="btn-watch">Watch Now →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section mood-section">
+      <h2> Pick Your Mood</h2>
+      <p class="section-desc">Select how you feel and get an instant recommendation</p>
+      <div class="mood-grid">
+        <button *ngFor="let mood of moods" class="mood-btn" [class.selected]="selectedMood === mood.key" (click)="selectMood(mood.key)">
+          <span class="mood-emoji">{{ mood.emoji }}</span>
+          <span class="mood-name">{{ mood.label }}</span>
+        </button>
+      </div>
+
+      <div class="mood-result" *ngIf="moodResult">
+        <h3>Recommended for you:</h3>
+        <div class="rec-movie" (click)="goToMovie(moodResult.id)">
+          <img *ngIf="moodResult.poster_url" [src]="moodResult.poster_url" [alt]="moodResult.title">
+          <div class="rec-info">
+            <h3>{{ moodResult.title }}</h3>
+            <p>{{ moodResult.genre | titlecase }} • ⭐ {{ moodResult.rating }}</p>
+            <span class="btn-watch">View Details →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

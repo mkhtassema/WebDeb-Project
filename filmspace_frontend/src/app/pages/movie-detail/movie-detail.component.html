@@ -1,0 +1,71 @@
+<div class="detail-page" *ngIf="!loading && movie">
+  <button class="back-btn" (click)="goBack()">← Back</button>
+
+  <div class="movie-hero">
+    <div class="movie-poster">
+      <img *ngIf="movie.poster_url" [src]="movie.poster_url" [alt]="movie.title">
+      <div *ngIf="!movie.poster_url" class="poster-placeholder">🎬</div>
+    </div>
+    <div class="movie-details">
+      <div class="tags">
+        <span class="tag genre">{{ movie.genre | titlecase }}</span>
+        <span class="tag mood">{{ movie.mood | titlecase }}</span>
+      </div>
+      <h1>{{ movie.title }}</h1>
+      <div class="meta">
+        <span>📅 {{ movie.year }}</span>
+        <span *ngIf="movie.director">🎬 {{ movie.director }}</span>
+        <span>⭐ {{ movie.rating }}/10</span>
+      </div>
+      <p class="description">{{ movie.description }}</p>
+      <div class="keywords" *ngIf="movie.keywords">
+        <span *ngFor="let kw of movie.keywords.split(',')" class="keyword-tag">{{ kw.trim() }}</span>
+      </div>
+      <div class="action-btns">
+        <a *ngIf="movie.watch_url" [href]="movie.watch_url" target="_blank" rel="noopener noreferrer" class="btn-watch">
+          Watch Now ▶
+        </a>
+        <button class="btn-fav" (click)="toggleFavorite()" [class.active]="movie.is_favorite">
+          {{ movie.is_favorite ? '❤️ In Favorites' : '🤍 Add to Favorites' }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="reviews-section">
+    <h2>Reviews ({{ reviews.length }})</h2>
+
+    <div class="review-form">
+      <h3>Write a Review</h3>
+      <div class="rating-input">
+        <label>Rating:</label>
+        <input type="range" [(ngModel)]="newReview.rating" min="1" max="10" step="1">
+        <span>{{ newReview.rating }}/10</span>
+      </div>
+      <textarea [(ngModel)]="newReview.text" placeholder="Share your thoughts..." rows="4"></textarea>
+      <div class="error-msg" *ngIf="reviewError">{{ reviewError }}</div>
+      <button class="btn-submit" (click)="submitReview()" [disabled]="reviewLoading">
+        {{ reviewLoading ? 'Submitting...' : 'Submit Review (+5 coins)' }}
+      </button>
+    </div>
+
+    <div class="reviews-list">
+      <div class="review-card" *ngFor="let review of reviews">
+        <div class="review-header">
+          <span class="review-user">{{ review.username }}</span>
+          <span class="review-rating">⭐ {{ review.rating }}/10</span>
+          <span class="review-date">{{ review.created_at | date:'mediumDate' }}</span>
+        </div>
+        <p class="review-text">{{ review.text }}</p>
+        <div class="review-actions" *ngIf="review.username === currentUser?.username">
+          <button class="btn-delete" (click)="deleteReview(review.id)">Delete</button>
+        </div>
+      </div>
+      <div class="empty-reviews" *ngIf="reviews.length === 0">
+        <p>No reviews yet. Be the first to review!</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="loading-state" *ngIf="loading">Loading movie...</div>

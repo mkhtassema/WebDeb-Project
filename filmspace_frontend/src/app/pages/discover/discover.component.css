@@ -1,0 +1,77 @@
+.discover-page { padding: 2rem; max-width: 1100px; margin: 0 auto; }
+
+.page-header { margin-bottom: 2rem; }
+.page-header h1 { font-size: 2rem; font-weight: 800; color: #c77dff; }
+.page-header p { color: #888; margin-top: 0.25rem; }
+
+.discover-sections { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+
+@media (max-width: 768px) { .discover-sections { grid-template-columns: 1fr; } }
+
+.section {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px; padding: 1.5rem;
+}
+.section h2 { font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+.section-desc { color: #888; font-size: 0.85rem; margin-bottom: 1.25rem; }
+
+.emotion-input { display: flex; flex-direction: column; gap: 0.75rem; }
+.emotion-input textarea {
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px; padding: 0.85rem; color: #fff; resize: none; outline: none;
+  font-size: 0.9rem; font-family: inherit; line-height: 1.5;
+}
+.emotion-input textarea:focus { border-color: #c77dff; }
+
+.btn-analyze {
+  padding: 0.8rem; background: linear-gradient(135deg, #c77dff, #7b2fff);
+  color: #fff; border: none; border-radius: 10px; font-size: 0.95rem;
+  font-weight: 600; cursor: pointer; transition: opacity 0.2s;
+}
+.btn-analyze:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.error-msg {
+  background: rgba(255,80,80,0.1); border: 1px solid rgba(255,80,80,0.3);
+  color: #ff6b6b; padding: 0.6rem; border-radius: 8px; font-size: 0.85rem; margin-top: 0.5rem;
+}
+
+.emotion-result, .mood-result { margin-top: 1.25rem; }
+
+.detected-mood {
+  display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
+.mood-label { color: #888; }
+.mood-value {
+  background: rgba(199,125,255,0.15); color: #c77dff;
+  padding: 0.2rem 0.6rem; border-radius: 20px; font-weight: 600; font-size: 0.85rem;
+}
+
+.rec-movie {
+  display: flex; gap: 1rem; background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1rem;
+  cursor: pointer; transition: border-color 0.2s;
+}
+.rec-movie:hover { border-color: rgba(199,125,255,0.4); }
+.rec-movie img { width: 60px; height: 90px; object-fit: cover; border-radius: 8px; }
+.rec-info h3 { font-size: 1rem; color: #fff; margin-bottom: 0.25rem; }
+.rec-info p { color: #888; font-size: 0.8rem; }
+.rec-desc { margin-top: 0.35rem !important; }
+.btn-watch {
+  display: inline-block; margin-top: 0.5rem; color: #c77dff; font-size: 0.8rem; font-weight: 600;
+}
+
+.mood-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; margin-bottom: 1rem;
+}
+.mood-btn {
+  display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px; padding: 0.75rem 0.25rem; cursor: pointer; transition: all 0.2s;
+}
+.mood-btn:hover, .mood-btn.selected {
+  background: rgba(199,125,255,0.15); border-color: rgba(199,125,255,0.4);
+}
+.mood-emoji { font-size: 1.4rem; }
+.mood-name { color: #aaa; font-size: 0.7rem; }
+.mood-result h3 { color: #c77dff; font-size: 0.95rem; margin-bottom: 0.75rem; }

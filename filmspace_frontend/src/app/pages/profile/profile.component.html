@@ -1,0 +1,80 @@
+<div class="profile-page" *ngIf="!loading && profile">
+  <div class="profile-header">
+    <div class="avatar">{{ profile.username?.charAt(0)?.toUpperCase() }}</div>
+    <div class="user-info">
+      <h1>{{ profile.username }}</h1>
+      <p class="email">{{ profile.email }}</p>
+      <p class="user-id-display">Your ID: <span class="user-id-value">{{ profile.user_id }}</span></p>
+      <div class="personality-badge" *ngIf="profile.personality_type">
+        <span class="personality-emoji">{{ getPersonalityEmoji(profile.personality_type) }}</span>
+        <span>{{ profile.personality_type | titlecase }}</span>
+      </div>
+    </div>
+    <button class="btn-edit" (click)="editMode = !editMode">{{ editMode ? 'Cancel' : 'Edit Profile' }}</button>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-icon">🪙</div>
+      <div class="stat-value">{{ profile.coins }}</div>
+      <div class="stat-label">Coins</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">⭐</div>
+      <div class="stat-value">Level {{ profile.level }}</div>
+      <div class="stat-label">
+        <div class="level-bar">
+          <div class="level-fill" [style.width.%]="getLevelProgress()"></div>
+        </div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">❤️</div>
+      <div class="stat-value">{{ favorites.length }}</div>
+      <div class="stat-label">Favorites</div>
+    </div>
+  </div>
+
+  <div class="edit-form" *ngIf="editMode">
+    <h2>Edit Profile</h2>
+    <div class="form-group">
+      <label>Bio</label>
+      <textarea [(ngModel)]="editForm.bio" placeholder="Tell us about yourself..." rows="3"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Favorite Genre</label>
+      <select [(ngModel)]="editForm.favorite_genre">
+        <option value="">Select genre</option>
+        <option *ngFor="let g of genres" [value]="g">{{ g | titlecase }}</option>
+      </select>
+    </div>
+    <div class="success-msg" *ngIf="saveSuccess">Profile saved successfully!</div>
+    <button class="btn-save" (click)="saveProfile()" [disabled]="saveLoading">
+      {{ saveLoading ? 'Saving...' : 'Save Changes' }}
+    </button>
+  </div>
+
+  <div class="bio-section" *ngIf="!editMode && profile.bio">
+    <h2>About</h2>
+    <p>{{ profile.bio }}</p>
+  </div>
+
+  <div class="favorites-section">
+    <h2>❤️ Favorite Movies ({{ favorites.length }})</h2>
+    <div class="favorites-grid" *ngIf="favorites.length > 0">
+      <div class="fav-card" *ngFor="let fav of favorites" (click)="goToMovie(fav.movie)">
+        <img *ngIf="fav.movie_details?.poster_url" [src]="fav.movie_details.poster_url" [alt]="fav.movie_details?.title">
+        <div *ngIf="!fav.movie_details?.poster_url" class="fav-placeholder">🎬</div>
+        <div class="fav-info">
+          <p class="fav-title">{{ fav.movie_details?.title }}</p>
+          <button class="btn-remove" (click)="$event.stopPropagation(); removeFavorite(fav.movie)">Remove</button>
+        </div>
+      </div>
+    </div>
+    <div class="empty-favs" *ngIf="favorites.length === 0">
+      <p>No favorites yet. Start adding movies you love!</p>
+    </div>
+  </div>
+</div>
+
+<div class="loading-state" *ngIf="loading">Loading profile...</div>

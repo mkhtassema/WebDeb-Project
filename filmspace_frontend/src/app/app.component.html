@@ -1,0 +1,22 @@
+<nav class="navbar" *ngIf="isLoggedIn">
+  <div class="nav-brand">
+    <span class="brand-icon">🎬</span>
+    <span class="brand-name">FilmSpace</span>
+  </div>
+  <div class="nav-links">
+    <a routerLink="/movies" routerLinkActive="active">Movies</a>
+    <a routerLink="/discover" routerLinkActive="active">Discover</a>
+    <a routerLink="/test" routerLinkActive="active">Taste DNA</a>
+    <a routerLink="/polls" routerLinkActive="active">Polls</a>
+    <a routerLink="/match" routerLinkActive="active">Match</a>
+    <a routerLink="/profile" routerLinkActive="active">Profile</a>
+  </div>
+  <div class="nav-user">
+    <span class="username">{{ currentUser?.username }}</span>
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </div>
+</nav>
+
+<main [class.with-nav]="isLoggedIn">
+  <router-outlet></router-outlet>
+</main>

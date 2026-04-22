@@ -1,0 +1,63 @@
+<div class="movies-page">
+  <div class="page-header">
+    <h1>🎬 Movie Library</h1>
+    <p>Discover your next cinematic experience</p>
+  </div>
+
+  <div class="controls">
+    <div class="search-bar">
+      <input type="text" [(ngModel)]="searchTerm" placeholder="Search movies..." (input)="loadMovies()">
+    </div>
+    <div class="filters">
+      <select [(ngModel)]="selectedMood" (change)="loadMovies()">
+        <option value="">All Moods</option>
+        <option *ngFor="let m of moods" [value]="m">{{ m | titlecase }}</option>
+      </select>
+      <select [(ngModel)]="selectedGenre" (change)="loadMovies()">
+        <option value="">All Genres</option>
+        <option *ngFor="let g of genres" [value]="g">{{ g | titlecase }}</option>
+      </select>
+      <button class="btn-clear" (click)="clearFilters()">Clear</button>
+    </div>
+    <button class="btn-random" (click)="getRandomMovie()">🎲 Random Movie</button>
+  </div>
+
+  <div class="random-card" *ngIf="randomMovie">
+    <div class="random-label">🎲 Random Pick</div>
+    <div class="random-content" (click)="goToMovie(randomMovie.id)">
+      <h3>{{ randomMovie.title }}</h3>
+      <p>{{ randomMovie.genre | titlecase }} • {{ randomMovie.year }} • ⭐ {{ randomMovie.rating }}</p>
+      <button class="btn-dismiss" (click)="$event.stopPropagation(); randomMovie = null">✕</button>
+    </div>
+  </div>
+
+  <div class="loading" *ngIf="loading">Loading movies...</div>
+
+  <div class="movies-grid" *ngIf="!loading">
+    <div class="movie-card" *ngFor="let movie of movies" (click)="goToMovie(movie.id)">
+      <div class="movie-poster">
+        <img *ngIf="movie.poster_url" [src]="movie.poster_url" [alt]="movie.title" loading="lazy">
+        <div *ngIf="!movie.poster_url" class="poster-placeholder">🎬</div>
+        <button class="fav-btn" (click)="toggleFavorite($event, movie)" [class.active]="movie.is_favorite">
+          {{ movie.is_favorite ? '❤️' : '🤍' }}
+        </button>
+      </div>
+      <div class="movie-info">
+        <h3 class="movie-title">{{ movie.title }}</h3>
+        <div class="movie-meta">
+          <span class="genre-tag">{{ movie.genre | titlecase }}</span>
+          <span class="mood-tag">{{ movie.mood }}</span>
+        </div>
+        <div class="movie-rating">⭐ {{ movie.rating }} • {{ movie.year }}</div>
+        <p class="movie-desc">{{ movie.description | slice:0:80 }}...</p>
+        <a *ngIf="movie.watch_url" [href]="movie.watch_url" target="_blank" rel="noopener noreferrer"
+           class="btn-watch-card" (click)="$event.stopPropagation()">Watch ▶</a>
+      </div>
+    </div>
+
+    <div class="empty-state" *ngIf="movies.length === 0">
+      <span>🎭</span>
+      <p>No movies found. Try different filters.</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,98 @@
+.profile-page { padding: 2rem; max-width: 900px; margin: 0 auto; }
+
+.profile-header {
+  display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px; padding: 1.5rem;
+}
+
+.avatar {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: linear-gradient(135deg, #c77dff, #7b2fff);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem; font-weight: 800; color: #fff; flex-shrink: 0;
+}
+
+.user-info { flex: 1; }
+.user-info h1 { font-size: 1.8rem; font-weight: 800; color: #fff; }
+.email { color: #888; font-size: 0.9rem; margin-top: 0.25rem; }
+
+.personality-badge {
+  display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.5rem;
+  background: rgba(199,125,255,0.15); color: #c77dff;
+  padding: 0.3rem 0.75rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;
+}
+
+.btn-edit {
+  background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #aaa;
+  padding: 0.6rem 1.25rem; border-radius: 10px; cursor: pointer; font-size: 0.9rem;
+  transition: all 0.2s;
+}
+.btn-edit:hover { border-color: #c77dff; color: #c77dff; }
+
+.stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
+
+.stat-card {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px; padding: 1.25rem; text-align: center;
+}
+.stat-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.stat-value { font-size: 1.5rem; font-weight: 800; color: #c77dff; margin-bottom: 0.25rem; }
+.stat-label { color: #888; font-size: 0.85rem; }
+
+.level-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-top: 0.5rem; }
+.level-fill { height: 100%; background: linear-gradient(135deg, #c77dff, #7b2fff); border-radius: 3px; transition: width 0.8s; }
+
+.edit-form {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem;
+}
+.edit-form h2 { color: #c77dff; margin-bottom: 1.25rem; }
+.form-group { margin-bottom: 1.25rem; }
+.form-group label { display: block; color: #bbb; font-size: 0.85rem; margin-bottom: 0.4rem; }
+.form-group textarea, .form-group select {
+  width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px; padding: 0.75rem; color: #fff; font-size: 0.9rem;
+  font-family: inherit; outline: none; resize: none;
+}
+.form-group textarea:focus, .form-group select:focus { border-color: #c77dff; }
+
+.btn-save {
+  padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #c77dff, #7b2fff);
+  color: #fff; border: none; border-radius: 10px; font-size: 0.9rem; font-weight: 600;
+  cursor: pointer; transition: opacity 0.2s;
+}
+.btn-save:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.success-msg {
+  background: rgba(80,255,80,0.1); border: 1px solid rgba(80,255,80,0.3);
+  color: #4cff6b; padding: 0.6rem; border-radius: 8px; font-size: 0.85rem; margin-bottom: 0.75rem;
+}
+
+.bio-section {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px; padding: 1.25rem; margin-bottom: 2rem;
+}
+.bio-section h2 { color: #c77dff; margin-bottom: 0.75rem; }
+.bio-section p { color: #ccc; line-height: 1.6; }
+
+.favorites-section h2 { color: #fff; margin-bottom: 1.25rem; font-size: 1.3rem; }
+
+.favorites-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; }
+
+.fav-card {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px; overflow: hidden; cursor: pointer;
+}
+.fav-card img { width: 100%; aspect-ratio: 2/3; object-fit: cover; }
+.fav-placeholder { aspect-ratio: 2/3; display: flex; align-items: center; justify-content: center; font-size: 2rem; background: #1a1a2e; }
+.fav-info { padding: 0.6rem; }
+.fav-title { font-size: 0.8rem; color: #ddd; margin-bottom: 0.4rem; }
+
+.btn-remove {
+  background: transparent; border: 1px solid rgba(255,80,80,0.3); color: #ff6b6b;
+  padding: 0.2rem 0.5rem; border-radius: 6px; cursor: pointer; font-size: 0.75rem; width: 100%;
+}
+
+.empty-favs { text-align: center; color: #666; padding: 2rem; }
+.loading-state { text-align: center; color: #888; padding: 4rem; }

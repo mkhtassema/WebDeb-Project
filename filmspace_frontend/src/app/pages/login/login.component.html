@@ -1,0 +1,24 @@
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-header">
+      <span class="logo"></span>
+      <h1>FilmSpace</h1>
+      <p>Your cinematic journey awaits</p>
+    </div>
+    <form (ngSubmit)="submit()" class="auth-form">
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" [(ngModel)]="form.username" name="username" placeholder="Enter username" required>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" [(ngModel)]="form.password" name="password" placeholder="Enter password" required>
+      </div>
+      <div class="error-msg" *ngIf="error">{{ error }}</div>
+      <button type="submit" class="btn-primary" [disabled]="loading">
+        {{ loading ? 'Signing in...' : 'Sign In' }}
+      </button>
+    </form>
+    <p class="auth-link">Don't have an account? <a routerLink="/register">Register</a></p>
+  </div>
+</div>

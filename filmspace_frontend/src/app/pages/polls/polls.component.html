@@ -1,0 +1,74 @@
+<div class="polls-page">
+  <div class="page-header">
+    <div>
+      <h1>🗳️ Movie Polls</h1>
+      <p>Vote and decide what to watch with friends</p>
+    </div>
+    <button class="btn-create" (click)="showCreateForm = !showCreateForm">
+      {{ showCreateForm ? '✕ Cancel' : '+ Create Poll' }}
+    </button>
+  </div>
+
+  <div class="create-form" *ngIf="showCreateForm">
+    <h2>Create a New Poll</h2>
+    <div class="form-group">
+      <label>Question</label>
+      <input type="text" [(ngModel)]="newPoll.question" placeholder="e.g. What should we watch tonight?">
+    </div>
+    <div class="form-group">
+      <label>Add Movie Options (select up to 5)</label>
+      <div class="movie-picker">
+        <div *ngFor="let movie of movies | slice:0:20" class="movie-option"
+          [class.selected]="newPoll.movie_options.includes(movie.id)"
+          (click)="toggleMovieOption(movie.id)">
+          <span>{{ movie.title }}</span>
+          <span class="check" *ngIf="newPoll.movie_options.includes(movie.id)">✓</span>
+        </div>
+      </div>
+    </div>
+    <button class="btn-submit" (click)="createPoll()" [disabled]="createLoading || !newPoll.question.trim()">
+      {{ createLoading ? 'Creating...' : 'Create Poll' }}
+    </button>
+  </div>
+
+  <div class="loading" *ngIf="loading">Loading polls...</div>
+
+  <div class="polls-list" *ngIf="!loading">
+    <div class="poll-card" *ngFor="let poll of polls">
+      <div class="poll-header">
+        <h3>{{ poll.question }}</h3>
+        <div class="poll-meta">
+          <span>by {{ poll.created_by_username }}</span>
+          <span>{{ poll.vote_count }} votes</span>
+        </div>
+      </div>
+
+      <div class="poll-options">
+        <div class="poll-option" *ngFor="let movie of poll.movie_options_details">
+          <div class="option-info">
+            <span class="option-title">{{ movie.title }}</span>
+            <span class="option-votes">{{ getVoteCount(poll, movie.id) }} votes</span>
+          </div>
+          <div class="vote-bar">
+            <div class="vote-fill" [style.width.%]="getVotePercent(poll, movie.id)"></div>
+          </div>
+          <div class="option-footer">
+            <span class="vote-percent">{{ getVotePercent(poll, movie.id) }}%</span>
+            <button class="btn-vote" (click)="vote(poll.id, movie.id)" [disabled]="hasVoted(poll)">
+              {{ hasVoted(poll) ? 'Voted' : 'Vote' }}
+            </button>
+          </div>
+        </div>
+
+        <div class="no-options" *ngIf="!poll.movie_options_details?.length">
+          <p>No movie options added to this poll yet.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="empty-state" *ngIf="polls.length === 0">
+      <span>🗳️</span>
+      <p>No polls yet. Create the first one!</p>
+    </div>
+  </div>
+</div>
